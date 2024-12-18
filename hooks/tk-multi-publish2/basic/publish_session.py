@@ -12,7 +12,10 @@ import os
 import hou
 import sgtk
 
-from tank_vendor import six
+try:
+    from tank_vendor import sgutils
+except ImportError:
+    from tank_vendor import six as sgutils
 
 HookBaseClass = sgtk.get_hook_baseclass()
 
@@ -41,8 +44,8 @@ class HoudiniSessionPublishPlugin(HookBaseClass):
         loader_url = "https://help.autodesk.com/view/SGDEV/ENU/?contextId=PC_APP_LOADER"
 
         return """
-        Publishes the file to ShotGrid. A <b>Publish</b> entry will be
-        created in ShotGrid which will include a reference to the file's current
+        Publishes the file to Flow Production Tracking. A <b>Publish</b> entry will be
+        created in Flow Production Tracking which will include a reference to the file's current
         path on disk. If a publish template is configured, a copy of the
         current session will be copied to the publish template path which
         will be the file that is published. Other users will be able to access
@@ -57,7 +60,7 @@ class HoudiniSessionPublishPlugin(HookBaseClass):
         file to the next version after publishing.
 
         The <code>version</code> field of the resulting <b>Publish</b> in
-        ShotGrid will also reflect the version number identified in the filename.
+        Flow Production Tracking will also reflect the version number identified in the filename.
         The basic worklfow recognizes the following version formats by default:
 
         <ul>
@@ -338,7 +341,7 @@ def _save_session(path):
     # We need to flip the slashes on Windows to avoid a bug in Houdini. If we don't
     # the next Save As dialog will have the filename box populated with the complete
     # file path.
-    sanitized_path = six.ensure_str(path.replace("\\", "/"))
+    sanitized_path = sgutils.ensure_str(path.replace("\\", "/"))
     hou.hipFile.save(file_name=sanitized_path)
 
 
