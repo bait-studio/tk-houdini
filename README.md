@@ -1,21 +1,48 @@
-[![VFX Platform](https://img.shields.io/badge/vfxplatform-2023%202022%202021%202020-blue.svg)](http://www.vfxplatform.com/)
-[![Python 3.7 3.9](https://img.shields.io/badge/python-3.7%20%7C%203.9-blue.svg)](https://www.python.org/)
-[![Build Status](https://dev.azure.com/shotgun-ecosystem/Toolkit/_apis/build/status/Engines/tk-houdini?branchName=master)](https://dev.azure.com/shotgun-ecosystem/Toolkit/_build/latest?definitionId=63&branchName=master)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/nfa-vfxim/tk-houdini?include_prereleases)](https://github.com/nfa-vfxim/tk-houdini) 
+[![GitHub issues](https://img.shields.io/github/issues/nfa-vfxim/tk-houdini)](https://github.com/nfa-vfxim/tk-houdini/issues) 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Linting](https://img.shields.io/badge/PEP8%20by-Hound%20CI-a873d1.svg)](https://houndci.com)
 
-## Documentation
-This repository is a part of the Flow Production Tracking Toolkit.
 
-- For more information about this app and for release notes, *see the wiki section*.
-- For general information and documentation, click here: https://help.autodesk.com/view/SGDEV/ENU/?contextId=SA_INTEGRATIONS_USER_GUIDE
-- For information about Flow Production Tracking in general, click here: https://www.autodesk.com/products/flow-production-tracking/overview
+# ShotGrid Engine for Houdini <img src="icon_256.png" alt="Icon" height="24"/>
 
-## Using this app in your Setup
-All the apps that are part of our standard app suite are pushed to our App Store.
-This is where you typically go if you want to install an app into a project you are
-working on. For an overview of all the Apps and Engines in the Toolkit App Store,
-click here: https://help.autodesk.com/view/SGDEV/ENU/?contextId=PC_TOOLKIT_APPS
+ShotGrid Pipeline Toolkit integration in Houdini
 
-## Have a Question?
-Don't hesitate to contact us at https://knowledge.autodesk.com/contact-support
+## Requirements
+
+| ShotGrid version | Core version | Engine version |
+|------------------|--------------|----------------|
+| -                | v0.20.5      | -              |
+
+**ShotGrid fields:** -
+
+**Frameworks:** -
+
+## Configuration
+
+### Booleans
+
+| Name                       | Description                                                                                                                                                                                                                                                                             | Default value |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| `automatic_context_switch` | Controls whether toolkit should attempt to automatically adjust its context every time the currently loaded file changes. Defaults to True.                                                                                                                                             | True          |
+| `enable_sg_menu`           | Controls whether a menu will be built with commands registered by the installed apps. It is not currently possible to rebuild the menu on a ShotGrid context switch, so this option allows for the menu to be disabled in favor of the ShotGrid shelf which can be rebuilt dynamically. | True          |
+| `enable_sg_shelf`          | Controls whether a shelf will be built with commands registered by the installed apps. The shelf will be rebuilt dynamically as the ShotGrid context changes.                                                                                                                           | True          |
+| `debug_logging`            | Controls whether debug messages should be emitted to the logger                                                                                                                                                                                                                         | False         |
+
+
+### Lists
+
+| Name                     | Description                                                                                                                                                                                                                                                                                                                                                                                                               | Default value                |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
+| `menu_favourites`        | Controls the favourites section on the main menu. This is a list and each menu item is a dictionary with keys app_instance and name. The app_instance parameter connects this entry to a particular app instance defined in the environment configuration file. The name is a menu name to make a favourite.                                                                                                              |                              |
+| `launch_builtin_plugins` | Comma-separated list of tk-houdini plugins to load when launching Houdini. Use of this feature disables the classic mechanism for bootstrapping Toolkit when Houdini is launched.                                                                                                                                                                                                                                         | []                           |
+| `run_at_startup`         | Controls what apps will run on startup.  This is a list where each element is a dictionary with two keys: 'app_instance' and 'name'.  The app_instance value connects this entry to a particular app instance defined in the environment configuration file.  The name is the menu name of the command to run when the Houdini engine starts up. If name is '' then all commands from the given app instance are started. | []                           |
+| `review_field_matches`   | Matches for the review template field value to enable "Submit for Review".                                                                                                                                                                                                                                                                                                                                                | ['main', 'beauty', 'master'] |
+
+
+### Strings
+
+| Name           | Description                                                                               | Default value |
+|----------------|-------------------------------------------------------------------------------------------|---------------|
+| `review_field` | Template field to match for enabling "Submit for Review" when publishing image sequences. |               |
+
+
